@@ -43,29 +43,29 @@ class _HomePageState extends State<HomePage> {
     ];
 
     var linesalesdata = [
-      new Sales(0, 45),
-      new Sales(1, 56),
-      new Sales(2, 55),
-      new Sales(3, 60),
-      new Sales(4, 61),
-      new Sales(5, 70),
+      new Sales(0, 10),
+      new Sales(1, 10),
+      new Sales(2, 10),
+      new Sales(3, 10),
+      new Sales(4, 10),
+      new Sales(5, 10),
     ];
     var linesalesdata1 = [
-      new Sales(0, 35),
-      new Sales(1, 46),
-      new Sales(2, 45),
-      new Sales(3, 50),
-      new Sales(4, 51),
-      new Sales(5, 60),
+      new Sales(0, 30),
+      new Sales(1, 30),
+      new Sales(2, 30),
+      new Sales(3, 30),
+      new Sales(4, 30),
+      new Sales(5, 30),
     ];
 
     var linesalesdata2 = [
       new Sales(0, 20),
-      new Sales(1, 24),
-      new Sales(2, 25),
-      new Sales(3, 40),
-      new Sales(4, 45),
-      new Sales(5, 60),
+      new Sales(1, 20),
+      new Sales(2, 20),
+      new Sales(3, 20),
+      new Sales(4, 20),
+      new Sales(5, 20),
     ];
 
     _seriesData.add(
@@ -250,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                           child: charts.LineChart(
                             _seriesLineData,
                             defaultRenderer: new charts.LineRendererConfig(
-                                includeArea: true, stacked: true),
+                                includeArea: true),
                             animate: true,
                             animationDuration: Duration(seconds: 5),
                             behaviors: [
@@ -290,7 +290,7 @@ class Pollution {
 
 class Disability {
   String disability;
-  double disabilityvalue;
+  int disabilityvalue;
   Color colorval;
 
   Disability(this.disability, this.disabilityvalue, this.colorval);

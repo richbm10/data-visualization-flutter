@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<charts.Series<Pollution, String>> _seriesData;
-  List<charts.Series<Task, String>> _seriesPieData;
+  List<charts.Series<Disability, String>> _seriesPieData;
   List<charts.Series<Sales, int>> _seriesLineData;
 
   _generateData() {
@@ -33,12 +33,13 @@ class _HomePageState extends State<HomePage> {
     ];
 
     var piedata = [
-      new Task('Work', 35.8, Color(0xff3366cc)),
-      new Task('Eat', 8.3, Color(0xff990099)),
-      new Task('Commute', 10.8, Color(0xff109618)),
-      new Task('TV', 15.6, Color(0xfffdbe19)),
-      new Task('Sleep', 19.2, Color(0xffff9900)),
-      new Task('Other', 10.3, Color(0xffdc3912)),
+      new Disability('San José', 9169, Color(0xff3366cc)),
+      new Disability('Cartago', 2785, Color(0xff990099)),
+      new Disability('Alajuela', 5738, Color(0xff109618)),
+      new Disability('Heredia', 2328, Color(0xfffdbe19)),
+      new Disability('Puntarenas', 3492, Color(0xffff9900)),
+      new Disability('Limón', 3126, Color(0xffdc3912)),
+      new Disability('Guanacaste', 2775, Color(0xff00bcd4)),
     ];
 
     var linesalesdata = [
@@ -105,13 +106,13 @@ class _HomePageState extends State<HomePage> {
 
     _seriesPieData.add(
       charts.Series(
-        domainFn: (Task task, _) => task.task,
-        measureFn: (Task task, _) => task.taskvalue,
-        colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
+        domainFn: (Disability disability, _) => disability.disability,
+        measureFn: (Disability disability, _) => disability.disabilityvalue,
+        colorFn: (Disability disability, _) =>
+            charts.ColorUtil.fromDartColor(disability.colorval),
         id: 'Air Pollution',
         data: piedata,
-         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+         labelAccessorFn: (Disability row, _) => '${row.disabilityvalue}',
       ),
     );
 
@@ -149,7 +150,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
-    _seriesPieData = List<charts.Series<Task, String>>();
+    _seriesPieData = List<charts.Series<Disability, String>>();
     _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
   }
@@ -206,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                            'Time spent on daily tasks',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                            'Población con Discapacidad para Hablar en Costa Rica',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
                             SizedBox(height: 10.0,),
                         Expanded(
                           child: charts.PieChart(
@@ -287,12 +288,12 @@ class Pollution {
   Pollution(this.year, this.place, this.quantity);
 }
 
-class Task {
-  String task;
-  double taskvalue;
+class Disability {
+  String disability;
+  double disabilityvalue;
   Color colorval;
 
-  Task(this.task, this.taskvalue, this.colorval);
+  Disability(this.disability, this.disabilityvalue, this.colorval);
 }
 
 class Sales {

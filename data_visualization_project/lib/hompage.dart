@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
     ];
 
     var linesalesdata1 = [
+      new DisabilityLineChart(0, 0),
       new DisabilityLineChart(14, 542618),
       new DisabilityLineChart(29, 589260),
       new DisabilityLineChart(59, 763923),
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage> {
     ];
 
     var linesalesdata2 = [
+      new DisabilityLineChart(0, 0),
       new DisabilityLineChart(14, 525212),
       new DisabilityLineChart(29, 604820),
       new DisabilityLineChart(59, 826543),
@@ -110,7 +112,7 @@ class _HomePageState extends State<HomePage> {
 
     _seriesLineData.add(
       charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff536dfe)),
         id: 'Hombres',
         data: linesalesdata1,
         domainFn: (DisabilityLineChart sales, _) => sales.age,
@@ -119,7 +121,7 @@ class _HomePageState extends State<HomePage> {
     );
     _seriesLineData.add(
       charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
+        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffea80fc)),
         id: 'Mujeres',
         data: linesalesdata2,
         domainFn: (DisabilityLineChart sales, _) => sales.age,
@@ -228,12 +230,12 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                            'Personas con Discapacidad en Costa Rica por Edad',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                            'Personas con Discapacidad en Costa Rica por Sexo y Edad',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
                         Expanded(
                           child: charts.LineChart(
                             _seriesLineData,
                             defaultRenderer: new charts.LineRendererConfig(
-                                includeArea: true, stacked: true),
+                                includeArea: true),
                             animate: true,
                             animationDuration: Duration(seconds: 5),
                             behaviors: [

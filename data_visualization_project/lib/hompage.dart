@@ -12,8 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<charts.Series<Pollution, String>> _seriesData;
-  List<charts.Series<Disability, String>> _seriesPieData;
-  List<charts.Series<Sales, int>> _seriesLineData;
+  List<charts.Series<DisabilityPie, String>> _seriesPieData;
+  List<charts.Series<DisabilityLineChart, int>> _seriesLineData;
 
   _generateData() {
     var data1 = [
@@ -33,39 +33,31 @@ class _HomePageState extends State<HomePage> {
     ];
 
     var piedata = [
-      new Disability('San José', 9169, Color(0xff3366cc)),
-      new Disability('Cartago', 2785, Color(0xff990099)),
-      new Disability('Alajuela', 5738, Color(0xff109618)),
-      new Disability('Heredia', 2328, Color(0xfffdbe19)),
-      new Disability('Puntarenas', 3492, Color(0xffff9900)),
-      new Disability('Limón', 3126, Color(0xffdc3912)),
-      new Disability('Guanacaste', 2775, Color(0xff00bcd4)),
+      new DisabilityPie('San José', 9169, Color(0xff3366cc)),
+      new DisabilityPie('Cartago', 2785, Color(0xff990099)),
+      new DisabilityPie('Alajuela', 5738, Color(0xff109618)),
+      new DisabilityPie('Heredia', 2328, Color(0xfffdbe19)),
+      new DisabilityPie('Puntarenas', 3492, Color(0xffff9900)),
+      new DisabilityPie('Limón', 3126, Color(0xffdc3912)),
+      new DisabilityPie('Guanacaste', 2775, Color(0xff00bcd4)),
     ];
 
-    var linesalesdata = [
-      new Sales(0, 45),
-      new Sales(1, 56),
-      new Sales(2, 55),
-      new Sales(3, 60),
-      new Sales(4, 61),
-      new Sales(5, 70),
-    ];
     var linesalesdata1 = [
-      new Sales(0, 35),
-      new Sales(1, 46),
-      new Sales(2, 45),
-      new Sales(3, 50),
-      new Sales(4, 51),
-      new Sales(5, 60),
+      new DisabilityLineChart(14, 542618),
+      new DisabilityLineChart(29, 589260),
+      new DisabilityLineChart(59, 763923),
+      new DisabilityLineChart(64, 65432),
+      new DisabilityLineChart(74, 86754),
+      new DisabilityLineChart(89, 53283),
     ];
 
     var linesalesdata2 = [
-      new Sales(0, 20),
-      new Sales(1, 24),
-      new Sales(2, 25),
-      new Sales(3, 40),
-      new Sales(4, 45),
-      new Sales(5, 60),
+      new DisabilityLineChart(14, 525212),
+      new DisabilityLineChart(29, 604820),
+      new DisabilityLineChart(59, 826543),
+      new DisabilityLineChart(64, 72192),
+      new DisabilityLineChart(74, 94828),
+      new DisabilityLineChart(89, 64672),
     ];
 
     _seriesData.add(
@@ -106,41 +98,32 @@ class _HomePageState extends State<HomePage> {
 
     _seriesPieData.add(
       charts.Series(
-        domainFn: (Disability disability, _) => disability.disability,
-        measureFn: (Disability disability, _) => disability.disabilityvalue,
-        colorFn: (Disability disability, _) =>
+        domainFn: (DisabilityPie disability, _) => disability.disability,
+        measureFn: (DisabilityPie disability, _) => disability.disabilityvalue,
+        colorFn: (DisabilityPie disability, _) =>
             charts.ColorUtil.fromDartColor(disability.colorval),
         id: 'Air Pollution',
         data: piedata,
-         labelAccessorFn: (Disability row, _) => '${row.disabilityvalue}',
+         labelAccessorFn: (DisabilityPie row, _) => '${row.disabilityvalue}',
       ),
     );
 
     _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-        id: 'Air Pollution',
-        data: linesalesdata,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
+        id: 'Hombres',
+        data: linesalesdata1,
+        domainFn: (DisabilityLineChart sales, _) => sales.age,
+        measureFn: (DisabilityLineChart sales, _) => sales.disabilities,
       ),
     );
     _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-        id: 'Air Pollution',
-        data: linesalesdata1,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-        id: 'Air Pollution',
+        id: 'Mujeres',
         data: linesalesdata2,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
+        domainFn: (DisabilityLineChart sales, _) => sales.age,
+        measureFn: (DisabilityLineChart sales, _) => sales.disabilities,
       ),
     );
   }
@@ -150,8 +133,8 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _seriesData = List<charts.Series<Pollution, String>>();
-    _seriesPieData = List<charts.Series<Disability, String>>();
-    _seriesLineData = List<charts.Series<Sales, int>>();
+    _seriesPieData = List<charts.Series<DisabilityPie, String>>();
+    _seriesLineData = List<charts.Series<DisabilityLineChart, int>>();
     _generateData();
   }
 
@@ -245,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                            'Sales for the first 5 years',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
+                            'Personas con Discapacidad en Costa Rica por Edad',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
                         Expanded(
                           child: charts.LineChart(
                             _seriesLineData,
@@ -254,16 +237,12 @@ class _HomePageState extends State<HomePage> {
                             animate: true,
                             animationDuration: Duration(seconds: 5),
                             behaviors: [
-        new charts.ChartTitle('Years',
+        new charts.ChartTitle('Edad',
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Sales',
+        new charts.ChartTitle('Discapacitados',
             behaviorPosition: charts.BehaviorPosition.start,
-            titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Departments',
-            behaviorPosition: charts.BehaviorPosition.end,
-            titleOutsideJustification:charts.OutsideJustification.middleDrawArea,
-            )   
+            titleOutsideJustification: charts.OutsideJustification.middleDrawArea)
       ]
                           ),
                         ),
@@ -288,17 +267,17 @@ class Pollution {
   Pollution(this.year, this.place, this.quantity);
 }
 
-class Disability {
+class DisabilityPie {
   String disability;
   double disabilityvalue;
   Color colorval;
 
-  Disability(this.disability, this.disabilityvalue, this.colorval);
+  DisabilityPie(this.disability, this.disabilityvalue, this.colorval);
 }
 
-class Sales {
-  int yearval;
-  int salesval;
+class DisabilityLineChart {
+  int age;
+  int disabilities;
 
-  Sales(this.yearval, this.salesval);
+  DisabilityLineChart(this.age, this.disabilities);
 }
